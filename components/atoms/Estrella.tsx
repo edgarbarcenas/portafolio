@@ -4,21 +4,17 @@ import { useState, type KeyboardEvent } from "react";
 import Layer from "./Layer";
 import { ESTRELLA_SIZE } from "@/lib/cv/estrella-placement";
 
-// Figma instance "Estrella" (Bio screen, page centre 219.5/764.5). The page
-// composer places the 209 x 209 box with `placementStyle(ESTRELLA_PLACEMENT)`
-// from ./estrella-placement
-// (whole-instance rotation baked into that transform); this component only
-// renders the unrotated 209 x 209 content and the hover micro-animation.
+// Whole-instance rotation is baked into placementStyle(ESTRELLA_PLACEMENT) by
+// the caller; this component renders only the unrotated content and the
+// hover micro-animation.
 
-// Face group box, relative to the 209 x 209 instance; its children's insets
-// below are relative to this smaller box, clipped by `overflow: hidden`.
+// Face group box relative to the 209 x 209 instance; descendant insets below
+// are relative to this smaller box, clipped by `overflow: hidden`.
 const FACE_GROUP_INSET = "29.82% 30.18% 29.45% 30.18%";
 
-// Default -> Variant2, Smart Animate 800 ms linear, reverts on leave/blur.
-// Only the star layer rotates (Figma -27.68deg -> CSS rotate(27.68deg));
-// circle and face group stay put. prefers-reduced-motion is handled globally
-// (app/globals.css zeroes all transition durations), so no JS check is needed
-// for a CSS-driven transition like this one.
+// Only the star layer rotates on hover/focus/tap (Figma -27.68deg -> CSS
+// rotate(27.68deg)); prefers-reduced-motion is handled globally in
+// app/globals.css, so no JS check is needed for this CSS-driven transition.
 export default function Estrella() {
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
@@ -51,7 +47,6 @@ export default function Estrella() {
         className="absolute block transition-transform duration-[800ms] ease-linear"
         style={{ inset: "2.11% 2.11% 2.11% 2.11%", transform: active ? "rotate(27.68deg)" : "rotate(0deg)" }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element -- Figma vector layer */}
         <img
           src="/figma/bio/star/star.svg"
           alt=""

@@ -17,7 +17,7 @@ describe("Curriculum", () => {
   it("renders every CV sub-section as a heading", () => {
     render(<Curriculum />);
 
-    const headings = ["Resumen Profesional", "Experiencia Profesional", "Proyectos Destacados", "Educación", "Idiomas"];
+    const headings = ["Resumen Profesional", "Experiencia Profesional", "Educación", "Idiomas"];
     headings.forEach((name) => {
       expect(screen.getByRole("heading", { level: 3, name })).toBeDefined();
     });
@@ -55,19 +55,10 @@ describe("Curriculum", () => {
     expect(screen.queryByText(/Independiente/)).toBeNull();
   });
 
-  it("links the Educadora Canina project internally", () => {
+  it("does not list projects (removed from the CV page by the developer)", () => {
     render(<Curriculum />);
 
-    const link = screen.getByRole("link", { name: "Ver proyecto" });
-    expect(link.getAttribute("href")).toBe("/proyectos/educadora-canina");
-  });
-
-  it("marks the external dashboard demo link as opening a new tab", () => {
-    render(<Curriculum />);
-
-    const link = screen.getByRole("link", { name: /Ver demo/ });
-    expect(link.getAttribute("target")).toBe("_blank");
-    expect(link.getAttribute("rel")).toBe("noopener noreferrer");
+    expect(screen.queryByRole("heading", { name: "Proyectos Destacados" })).toBeNull();
   });
 
   it("lists the languages", () => {

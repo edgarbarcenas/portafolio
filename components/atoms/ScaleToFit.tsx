@@ -10,9 +10,8 @@ type Props = {
   children: ReactNode;
 };
 
-// Responsive adaptation (not specified in Figma): absolutely positioned
-// compositions keep their exact 1440-reference geometry and scale down
-// uniformly when their container is narrower. Never scales up.
+// Not in Figma: scales the fixed-geometry composition down uniformly to fit
+// a narrower container; never scales up.
 export default function ScaleToFit({ width, height, className, children }: Props) {
   const outer = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);

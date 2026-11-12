@@ -11,11 +11,9 @@ type Props = {
   items: readonly Item[];
 };
 
-// Responsive proposal (not in Figma): below the 1280 px desktop breakpoint,
-// the menu collapses into a "Menú" toggle opening a vertical panel with the
-// same items/colours as the desktop nav (inherited from the parent <nav>'s
-// background/text classes in SiteNav.tsx). Escape closes it and returns
-// focus to the toggle; the panel is in normal flow (no overlay/z-index).
+// Not in Figma: below 1280px the nav collapses into a "Menú" toggle; colours
+// inherit from the parent <nav> in SiteNav.tsx. Escape returns focus to the
+// toggle; the panel stays in normal flow (no overlay).
 export default function MobileNavToggle({ logoNav, items }: Props) {
   const [open, setOpen] = useState(false);
   const panelId = useId();

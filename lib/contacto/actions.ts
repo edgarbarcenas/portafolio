@@ -13,8 +13,6 @@ function readInput(formData: FormData): ContactInput {
   };
 }
 
-// Success is reported only after a real send. Without SMTP settings (see
-// mail-config.ts) the honest answer is "unavailable".
 export async function enviarMensaje(
   _prev: ContactFormState,
   formData: FormData

@@ -273,9 +273,7 @@ export default function IntroOverlay() {
                 transformOrigin: "top left",
               }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element -- Figma vector background */}
               <img src="/figma/intro/bg-left.svg" alt="" aria-hidden="true" draggable={false} className="pointer-events-none absolute block max-w-none" style={{ left: 0, top: -8, width: 609, height: 693 }} />
-              {/* eslint-disable-next-line @next/next/no-img-element -- Figma vector background */}
               <img src="/figma/intro/bg-right.svg" alt="" aria-hidden="true" draggable={false} className="pointer-events-none absolute block max-w-none" style={{ left: 640, top: 1, width: 801, height: 691 }} />
               <div className="absolute" style={{ left: SPLASH.x, top: SPLASH.y, width: SPLASH.w, height: SPLASH.h }}>
                 <Splash transition={transition} onAdvance={advance} onDrag={dragAdvance} />
@@ -320,8 +318,6 @@ export default function IntroOverlay() {
           transformOrigin: "top left",
         }}
       >
-        {/* 1. Background shapes */}
-        {/* eslint-disable-next-line @next/next/no-img-element -- Figma vector background, see components/atoms/Layer.tsx */}
         <img
           src="/figma/intro/bg-left.svg"
           alt=""
@@ -330,7 +326,6 @@ export default function IntroOverlay() {
           className="absolute block max-w-none"
           style={{ left: 0, top: -8, width: 609 + fill.dx, height: 693 + 2 * fill.dy }}
         />
-        {/* eslint-disable-next-line @next/next/no-img-element -- Figma vector background, see components/atoms/Layer.tsx */}
         <img
           src="/figma/intro/bg-right.svg"
           alt=""
@@ -340,7 +335,6 @@ export default function IntroOverlay() {
           style={{ left: 640 + fill.dx, top: 1, width: 801 + fill.dx, height: 691 + 2 * fill.dy }}
         />
 
-        {/* 3. Nav bar */}
         <div
           className="absolute overflow-hidden bg-purpura"
           style={{ left: 0, top: NAV_BAR_TOP, width: fill.w, height: NAV_BAR_H }}
@@ -354,12 +348,10 @@ export default function IntroOverlay() {
           </p>
         </div>
 
-        {/* 4. Splash illustration box */}
         <div className="absolute" style={{ left: 359 + fill.dx, top: 162 + fill.dy, width: 600, height: 482 }}>
           <Splash transition={transition} onAdvance={advance} onDrag={dragAdvance} />
         </div>
 
-        {/* 5. Scroll (paw + label), exits the overlay */}
         <button
           type="button"
           onClick={exit}
@@ -383,7 +375,6 @@ export default function IntroOverlay() {
           </span>
         </button>
 
-        {/* 6. Side bar, drag-to-exit */}
         <div
           aria-hidden="true"
           className="absolute cursor-grab touch-none"

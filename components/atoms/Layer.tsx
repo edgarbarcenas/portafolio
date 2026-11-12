@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element -- Figma vector layers, stretched like the source (preserveAspectRatio="none") */
 import type { CSSProperties } from "react";
 
 export type LayerSpec = {
@@ -8,8 +7,6 @@ export type LayerSpec = {
   blend?: "screen" | "multiply";
 };
 
-// One absolutely positioned Figma layer: the wrapper takes the inset box and
-// the image fills it, matching the design-context output.
 export default function Layer({ src, inset, blend }: LayerSpec) {
   const style: CSSProperties = { inset };
   if (blend) style.mixBlendMode = blend;

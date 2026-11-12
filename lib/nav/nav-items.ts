@@ -9,7 +9,6 @@ export type NavItemDef = {
   left1440: number;
 };
 
-// Order + x-positions from .claude/parallel/specs/T-01-nav.md.
 export const NAV_ITEMS: readonly NavItemDef[] = [
   { label: "Experiencia", left1440: 789 },
   { label: "Proyectos", left1440: 912 },

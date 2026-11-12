@@ -1,17 +1,7 @@
-// SMTP settings for the contact form, read from environment variables so no
-// credential ever lives in the code. Put them in `.env.local` (git-ignored)
-// or in the hosting provider's environment settings:
-//
-//   CONTACT_SMTP_HOST      smtp.example.com
-//   CONTACT_SMTP_PORT      465 (implicit TLS) or 587 (STARTTLS)
-//   CONTACT_SMTP_SECURE    optional "true"/"false"; defaults to true on 465
-//   CONTACT_SMTP_USER      SMTP account user
-//   CONTACT_SMTP_PASSWORD  SMTP account password / app password
-//   CONTACT_MAIL_FROM      sender address the SMTP account may use
-//   CONTACT_MAIL_TO        inbox that receives the messages
-//
-// While any of them is missing the form answers "unavailable" and never
-// pretends to have sent anything.
+// Read from environment variables (`.env.local` or the hosting provider's
+// settings) so no credential ever lives in the code. Port 465 implies TLS,
+// 587 implies STARTTLS. While any variable is missing the form answers
+// "unavailable" and never pretends to have sent anything.
 
 export type MailConfig = {
   host: string;

@@ -1,5 +1,3 @@
-import { ROUTES } from "@/lib/routes";
-
 // Plain data for the CV page (components/organisms/Curriculum.tsx). Content comes
 // verbatim from the developer's CV; contact details (phone, email, street
 // address) are intentionally omitted.
@@ -106,19 +104,6 @@ export const EXPERIENCIA: readonly Experiencia[] = [
     logros: ["Sitios WordPress para mecomunico.cl y mujerespoliticas.cl."],
   },
 ];
-
-export type ProyectoLink =
-  | { kind: "interno"; href: string }
-  | { kind: "externo"; href: string };
-
-export type Proyecto = {
-  nombre: string;
-  link?: ProyectoLink;
-  descripcion: string;
-  tecnologias: readonly string[];
-};
-
-export const PROYECTOS: readonly Proyecto[] = [];
 
 export type Educacion = {
   titulo: string;

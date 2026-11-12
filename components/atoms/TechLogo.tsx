@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element -- Figma vector logo */
 "use client";
 
 import { useEffect, useId, useState } from "react";
@@ -9,11 +8,9 @@ type Props = {
   height: number;
 };
 
-// Logo with its name in the Figma "Assistive chip" (MD3 elevated, lime) as a
-// tooltip. Figma placed one static "Next.js" chip; the developer asked for a
-// per-logo tooltip on hover (2026-11-12). The chip keeps the Figma offset from
-// its logo: box at (78, 75) from the logo's top-left. Shown on mouse hover and
-// keyboard focus, toggled by tap on touch, dismissed with Escape.
+// Figma offset from its logo: tooltip box at (78, 75) from the logo's
+// top-left. Shown on hover/focus, toggled by tap on touch, dismissed with
+// Escape.
 export default function TechLogo({ src, name, height }: Props) {
   const tooltipId = useId();
   const [hovered, setHovered] = useState(false);

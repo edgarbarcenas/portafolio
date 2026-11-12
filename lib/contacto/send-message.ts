@@ -2,9 +2,7 @@ import nodemailer from "nodemailer";
 import type { MailConfig } from "./mail-config";
 import type { ContactInput } from "./validation";
 
-// The only place that talks to SMTP. Resolves when the server accepted the
-// message; throws otherwise. The visitor's address goes in Reply-To, never in
-// From, so the SMTP account stays the sender.
+// The visitor's address goes in Reply-To, never in From, so the SMTP account stays the sender.
 export async function sendContactMessage(config: MailConfig, input: ContactInput): Promise<void> {
   const transport = nodemailer.createTransport({
     host: config.host,

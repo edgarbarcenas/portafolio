@@ -22,12 +22,11 @@ const EDGAR_BODY = { x: 0, y: 57.1, w: 122.1, h: 297 };
 const PERRO_SIZE = { w: 60, h: 224 };
 const BALL_SIZE = { w: 33, h: 33 };
 
-// Keeps each rotation continuous across renders (see unwrapAngle): remembers
-// the last *rendered* angle in state and, when the target changes, re-centres
-// it so the CSS transition always takes the shortest path. This is React's
-// documented "adjust state during render" pattern (no ref access during
-// render, no effect indirection) — the conditional setState below runs
-// synchronously before paint, it does not flash the stale angle first.
+// Keeps rotation continuous across renders (see unwrapAngle): remembers the
+// last rendered angle, and when the target changes, re-centres it so the
+// transition takes the shortest path. This is React's "adjust state during
+// render" pattern — the setState below runs synchronously before paint, so
+// it never flashes the stale angle.
 function useUnwrappedAngle(target: number): number {
   const [previousTarget, setPreviousTarget] = useState(target);
   const [angle, setAngle] = useState(target);
@@ -44,12 +43,10 @@ type Props = {
   onDrag: () => void;
 };
 
-// The 9-state splash illustration (Figma screen 00, fills its 600x482
-// container). One <button> advances the state on click/Enter/Space; while in
-// "Default", dragging the ball is an additional pointer-only shortcut to the
-// same next state (V5), using the prototype's drag timing instead of the
-// click one. See splash-machine.ts for the transition rules and
-// splash-geometry.ts for the per-state layer placement.
+// From the Default state only, dragging the ball is an additional
+// pointer-only shortcut to the same next state (V5), using the prototype's
+// drag timing instead of the click one. See splash-machine.ts for the
+// transition rules and splash-geometry.ts for the per-state layer placement.
 export default function Splash({ transition, onAdvance, onDrag }: Props) {
   const { state, index, durationMs, easing } = transition;
   const isLast = state === "V9";
@@ -104,9 +101,8 @@ export default function Splash({ transition, onAdvance, onDrag }: Props) {
     zIndex: zIndices(state).ball,
   };
 
-  // Pointer drag on the ball: only meaningful from Default (matched against
-  // the live transition, not a captured value, since the handler outlives
-  // the render it was created in).
+  // Only meaningful from Default; matched against the live transition (not
+  // a captured value) since the handler outlives the render it was created in.
   function handleBallPointerDown(event: ReactPointerEvent<HTMLSpanElement>) {
     if (index !== 0) return;
     const startX = event.clientX;
@@ -131,8 +127,8 @@ export default function Splash({ transition, onAdvance, onDrag }: Props) {
     el.addEventListener("pointercancel", cleanup);
   }
 
-  // A completed drag already advanced the state; swallow the click the
-  // browser fires on pointerup so it does not advance a second time.
+  // Swallow the click fired after a completed drag's pointerup, so state
+  // doesn't advance twice.
   function handleClick() {
     if (justDraggedRef.current) {
       justDraggedRef.current = false;
@@ -150,7 +146,6 @@ export default function Splash({ transition, onAdvance, onDrag }: Props) {
       className="relative block h-full w-full cursor-pointer overflow-visible border-0 bg-transparent p-0"
     >
       <span className="block" style={edgarBoxStyle}>
-        {/* eslint-disable-next-line @next/next/no-img-element -- Figma vector layer stretched to its placed box, see components/atoms/Layer.tsx */}
         <img
           src="/figma/intro/edgar-body.svg"
           alt=""
@@ -159,7 +154,6 @@ export default function Splash({ transition, onAdvance, onDrag }: Props) {
           className="block max-w-none"
           style={bodyStyle}
         />
-        {/* eslint-disable-next-line @next/next/no-img-element -- Figma vector layer stretched to its placed box, see components/atoms/Layer.tsx */}
         <img
           src="/figma/intro/edgar-head.svg"
           alt=""
@@ -177,7 +171,6 @@ export default function Splash({ transition, onAdvance, onDrag }: Props) {
         style={ballStyle}
         onPointerDown={handleBallPointerDown}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element -- Figma vector layer stretched to its placed box, see components/atoms/Layer.tsx */}
         <img
           src="/figma/intro/ball.svg"
           alt=""

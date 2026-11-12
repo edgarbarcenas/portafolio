@@ -11,7 +11,6 @@ export default function EducadoraCaninaHero() {
       {/* Organic background shape, page (0, 104) -> block-relative (0, -39),
           1438 x 909. Overflows the block on purpose; only horizontal
           overflow is clipped. */}
-      {/* eslint-disable-next-line @next/next/no-img-element -- Figma vector art, decorative organic shape */}
       <img
         src="/figma/proyecto/hero-bg.svg"
         alt=""

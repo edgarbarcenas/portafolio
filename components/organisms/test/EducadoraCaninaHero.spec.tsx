@@ -6,8 +6,8 @@ import EducadoraCaninaHero from "../EducadoraCaninaHero";
 // each test starts from an empty document.
 afterEach(cleanup);
 
-// jsdom has no ResizeObserver; components/atoms/ScaleToFit.tsx (shared,
-// not owned by this task) needs one. Stub it for this spec only.
+// jsdom has no ResizeObserver; components/atoms/ScaleToFit.tsx needs one.
+// Stub it for this spec only.
 beforeAll(() => {
   if (!("ResizeObserver" in globalThis)) {
     class ResizeObserverStub {

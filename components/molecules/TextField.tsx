@@ -1,11 +1,9 @@
 import type { RefObject } from "react";
 import type { FieldBaseProps } from "./field-props";
 
-// 530 wide, lila background, Epilogue Medium 20/27 black — the Figma text is
-// the placeholder look; a real (visually hidden) label carries the a11y name.
-// Focus: the field turns white with a 3px dark-purple bar at the bottom;
-// errors: a 3px dark bar plus text. Flat, like the rest of the design.
-// Both are proposals, not in Figma.
+// Figma's text is the placeholder look; a real (visually hidden) label
+// carries the a11y name. Focus/error states (white bg + bottom bar) are
+// proposals, not in Figma.
 export default function TextField({
   id,
   name,

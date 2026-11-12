@@ -4,9 +4,6 @@ import type { SkillIconKey } from "./icon-layers";
 export type SkillRow = { icon: SkillIconKey; label: string; rating?: number };
 export type SkillCategory = { title: string; rows: SkillRow[] };
 
-// Card order, content and ratings set by the developer's updated CV,
-// 2026-11-12: Arquitectura gains gRPC, Cloud & DevOps gains CI/CD,
-// Testing & Herramientas renamed Herramientas, TypeORM dropped.
 export const SKILL_CATEGORIES: SkillCategory[] = [
   {
     title: "Arquitectura",

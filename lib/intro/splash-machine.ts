@@ -53,10 +53,10 @@ export const INITIAL_SPLASH_TRANSITION: SplashTransition = {
 //   reaches the same next state (V5) but with the prototype's drag reaction
 //   timing: 1200 ms linear (MOTION.introDragMs). From any other state it is
 //   a no-op.
-// - "scroll" (wheel, swipe, arrow keys) — requested by the developer on
-//   2026-11-12, not part of the Figma prototype: down steps forward like a
-//   click, up steps back one state, both 800 ms ease-in-out. Past either end
-//   it is a no-op (the overlay turns a forward scroll on V9 into the exit).
+// - "scroll" (wheel, swipe, arrow keys), not part of the Figma prototype:
+//   down steps forward like a click, up steps back one state, both 800 ms
+//   ease-in-out. Past either end it is a no-op (the overlay turns a forward
+//   scroll on V9 into the exit).
 // - Reduced motion collapses the duration to 0 regardless of the trigger.
 export function splashReducer(
   current: SplashTransition,

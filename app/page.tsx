@@ -9,8 +9,6 @@ import Habilidades from "@/components/organisms/Habilidades";
 import Contacto from "@/components/organisms/Contacto";
 import HuellasTrail from "@/components/organisms/HuellasTrail";
 
-// Figma screen 01 (home), with screen 00 (intro) as an overlay shown once per
-// session. Section order follows the handoff note.
 export default function Home() {
   return (
     <>
@@ -21,8 +19,7 @@ export default function Home() {
         <Hero />
         <Tecnologias />
         <Experiencia />
-        {/* Breathing room under the contact form (not in Figma, which ends the
-            page at the form). */}
+        {/* Not in Figma: breathing room under the contact form. */}
         <div className="mx-auto w-full max-w-[1280px] pb-12 xl:pb-20">
           <Proyectos />
           <Habilidades />

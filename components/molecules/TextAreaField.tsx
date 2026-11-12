@@ -1,7 +1,6 @@
 import type { RefObject } from "react";
 import type { FieldBaseProps } from "./field-props";
 
-// Multi-line twin of TextField (same flat focus and error treatment).
 export default function TextAreaField({
   id,
   name,

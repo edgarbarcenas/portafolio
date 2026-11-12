@@ -3,9 +3,8 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Estrella from "../Estrella";
 
-// This project's vitest config does not enable `test.globals`, so
-// Testing Library's auto-cleanup never registers; without this, renders
-// from earlier tests in this file accumulate in the document.
+// test.globals is disabled, so Testing Library's auto-cleanup never
+// registers without this call.
 afterEach(cleanup);
 
 function starLayer(root: HTMLElement) {
@@ -48,8 +47,7 @@ describe("Estrella", () => {
     const root = screen.getByRole("img", { name: "Estrella decorativa con el rostro de Edgar" });
     const layer = starLayer(root);
 
-    // Plain `click`, no surrounding pointer/mouse choreography: the closest
-    // jsdom approximation of a touch tap (no hover).
+    // Closest jsdom approximation of a touch tap: plain `click`, no hover.
     fireEvent.click(root);
     expect(layer?.style.transform).toBe("rotate(27.68deg)");
 

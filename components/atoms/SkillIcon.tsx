@@ -1,10 +1,7 @@
-/* eslint-disable @next/next/no-img-element -- Figma vector icon layers, composed and positioned like components/atoms/Layer.tsx; next/image would resample them. */
 import type { CSSProperties } from "react";
 import { SKILL_ICONS, type SkillIconKey } from "@/lib/habilidades/icon-layers";
 
-// One skills-grid icon: the shared base circle (fondo.svg) plus the logo
-// layer(s) from `icon-layers`. Purely decorative — the row's text label
-// carries the meaning.
+// Purely decorative; the row's text label carries the meaning.
 export default function SkillIcon({ icon }: { icon: SkillIconKey }) {
   const spec = SKILL_ICONS[icon];
   const boxStyle: CSSProperties = { inset: spec.boxInset };

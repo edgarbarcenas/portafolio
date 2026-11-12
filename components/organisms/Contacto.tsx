@@ -68,7 +68,6 @@ function IllustrationArt() {
         height={299}
         style={{ position: "absolute", left: 0, top: 101.64 }}
       />
-      {/* eslint-disable-next-line @next/next/no-img-element -- Figma vector art, absolutely placed inside the fixed composition */}
       <img
         src="/figma/common/contact-head.svg"
         alt=""
@@ -115,7 +114,6 @@ export default function Contacto({ variant }: Props) {
         // Responsive proposal (not in Figma): the diagonal wave is a section-level
         // decorative backdrop sized for the 1280 desktop box; below xl it is
         // hidden rather than attempting a partial, visually noisy crop.
-        // eslint-disable-next-line @next/next/no-img-element -- Figma vector background
         <img
           src="/figma/common/contact-bg.svg"
           alt=""

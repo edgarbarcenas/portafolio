@@ -1,9 +1,8 @@
 // Icon composition data for the "skills" icon pattern: a shared 50x50 base
 // circle (fondo.svg) plus one or two logo layers placed by a pixel box over
 // it. A few logos are clipped to a non-square shape via a CSS mask instead of
-// sitting in the box as a plain image. Values come from the Figma handoff
-// (T-05 spec); see components/atoms/Layer.tsx for the inset-layer pattern
-// this mirrors.
+// sitting in the box as a plain image. See components/atoms/Layer.tsx for the
+// inset-layer pattern this mirrors.
 
 const ICON_BOX = 50;
 
@@ -87,11 +86,11 @@ export const SKILL_ICONS = {
   supabase: simple({ x: 4, y: 4, w: 42, h: 42 }, "/figma/skills/supabase.svg"),
   docker: simple({ x: 9, y: 9, w: 32, h: 32 }, "/figma/skills/docker.svg", "13.87% 0% 13.97% 0%", true),
   vercel: simple({ x: 10, y: 11, w: 29, h: 29 }, "/figma/skills/vercel.svg"),
-  // Not in the Figma file: Simple Icons "googlecloud" (CC0), added on request.
+  // Not in the Figma file: Simple Icons "googlecloud" (CC0).
   "google-cloud": simple({ x: 9, y: 9, w: 32, h: 32 }, "/figma/skills/google-cloud.svg"),
-  // Not in the Figma file, added on request (2026-11-12). NestJS reuses the
-  // hero logo; the brand logos are Simple Icons (CC0); the architecture and
-  // calendar glyphs are generic, brand-free line icons.
+  // Not in the Figma file. NestJS reuses the hero logo; the brand logos are
+  // Simple Icons (CC0); the architecture and calendar glyphs are generic,
+  // brand-free line icons.
   nestjs: simple({ x: 7, y: 7.72, w: 36, h: 34.56 }, "/figma/inicio/logo-nestjs.svg"),
   firebase: simple({ x: 9, y: 9, w: 32, h: 32 }, "/figma/skills/firebase.svg"),
   jest: simple({ x: 9, y: 9, w: 32, h: 32 }, "/figma/skills/jest.svg"),
@@ -103,8 +102,8 @@ export const SKILL_ICONS = {
   hexagonal: simple({ x: 10, y: 10, w: 30, h: 30 }, "/figma/skills/hexagonal.svg"),
   "multi-tenant": simple({ x: 10, y: 10, w: 30, h: 30 }, "/figma/skills/multi-tenant.svg"),
   "event-driven": simple({ x: 10, y: 10, w: 30, h: 30 }, "/figma/skills/event-driven.svg"),
-  // Not in the Figma file, added on request (2026-11-12): gRPC has no Simple
-  // Icons brand icon; CI/CD is generic. Both are brand-free line glyphs.
+  // Not in the Figma file: gRPC has no Simple Icons brand icon; CI/CD is
+  // generic. Both are brand-free line glyphs.
   grpc: simple({ x: 10, y: 10, w: 30, h: 30 }, "/figma/skills/grpc.svg"),
   "ci-cd": simple({ x: 10, y: 10, w: 30, h: 30 }, "/figma/skills/ci-cd.svg"),
 } satisfies Record<string, SkillIconSpec>;

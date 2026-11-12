@@ -1,6 +1,4 @@
-// Shared between the client form (immediate feedback) and the server action
-// (source of truth): both call the same pure function so the rules never
-// drift apart. Spanish copy because the whole site is in Spanish.
+// Shared by the client form and the server action so validation rules never drift apart.
 
 export type ContactInput = {
   nombre: string;

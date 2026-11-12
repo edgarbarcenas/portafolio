@@ -16,13 +16,11 @@ export default function Perfil() {
             <li className="flex">
               {/* Figma: the 15px icon sits 2px below the top of the 24px text line. */}
               <Link href={ROUTES.home} className="flex items-start gap-2 text-base font-medium leading-6 text-negro">
-                {/* eslint-disable-next-line @next/next/no-img-element -- Figma vector icon */}
                 <img src="/figma/bio/icon-home.svg" alt="" aria-hidden="true" width={15} height={15} className="mt-0.5 block" />
                 Home
               </Link>
             </li>
             <li aria-hidden="true" className="flex">
-              {/* eslint-disable-next-line @next/next/no-img-element -- Figma vector icon */}
               <img src="/figma/bio/icon-arrow.svg" alt="" width={16} height={7} className="block" />
             </li>
             <li className="flex">

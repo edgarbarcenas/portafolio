@@ -8,9 +8,7 @@ type Props = {
   className?: string;
 };
 
-// Rotation transition: Figma Smart Animate Default -> Variant2, 800 ms linear
-// (lib/motion MOTION.hoverMs). Values below are already converted to CSS
-// degrees (CSS = -Figma rotation), see placementStyle.
+// Values below are CSS degrees (CSS = -Figma rotation), see placementStyle.
 const ROTATE: Record<"star6" | "star7" | "ellipse146", { default: number; active: number }> = {
   star6: { default: 0, active: 180 },
   star7: { default: 0, active: 180 },
@@ -36,10 +34,8 @@ function rotatingLayerStyle(
   };
 }
 
-// "Elementos banner", 510 x 392. Decorative composition; the only prototyped
-// interaction is a hover/focus rotation on three of its layers (no 3D, no
-// continuous animation). Not prototyped for touch: tapping toggles the
-// active state so the interaction stays reachable without hover.
+// Not prototyped for touch in Figma: tapping toggles the active state so
+// the hover rotation stays reachable without a pointer.
 export default function Banner({ className }: Props) {
   const [active, setActive] = useState(false);
 
@@ -69,7 +65,6 @@ export default function Banner({ className }: Props) {
         className="absolute block rounded-full bg-[#f9d57f]"
         style={placementStyle({ w: 345, h: 345, cx: 165 + 345 / 2, cy: 27 + 345 / 2 })}
       />
-      {/* eslint-disable-next-line @next/next/no-img-element -- Figma vector layer, rotates on hover/focus */}
       <img
         src="/figma/inicio/banner-star6.svg"
         alt=""
@@ -83,7 +78,6 @@ export default function Banner({ className }: Props) {
         className="absolute block rounded-full bg-[#009379]"
         style={placementStyle({ w: 222, h: 222, cx: 35 + 222 / 2, cy: 0 + 222 / 2 })}
       />
-      {/* eslint-disable-next-line @next/next/no-img-element -- Figma vector layer, includes its own texture-filter margin */}
       <img
         src="/figma/inicio/banner-ellipse146.svg"
         alt=""
@@ -96,7 +90,6 @@ export default function Banner({ className }: Props) {
           active,
         )}
       />
-      {/* eslint-disable-next-line @next/next/no-img-element -- Figma vector layer, rotates on hover/focus */}
       <img
         src="/figma/inicio/banner-star7.svg"
         alt=""

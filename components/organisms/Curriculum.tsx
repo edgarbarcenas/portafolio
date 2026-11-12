@@ -1,7 +1,6 @@
-import Link from "next/link";
 import Huellita from "@/components/atoms/Huellita";
 import { placementStyle } from "@/lib/placement";
-import { EDUCACION, EXPERIENCIA, IDIOMAS, PROYECTOS, RESUMEN } from "@/lib/cv/cv-data";
+import { EDUCACION, EXPERIENCIA, IDIOMAS, RESUMEN } from "@/lib/cv/cv-data";
 
 // Paw accent, block-relative centre (1255.2, 56.3) (page 833.3 - 777),
 // 62.16 x 51.03, Figma rot -27.43 -> CSS rotate(27.43deg). Same placement as
@@ -74,46 +73,6 @@ export default function Curriculum() {
             ))}
           </ul>
         </article>
-
-        {PROYECTOS.length > 0 && (
-          <article className="flex flex-col gap-6">
-            <h3 className={SUBTITLE}>Proyectos Destacados</h3>
-            <ul className="flex flex-col gap-6">
-              {PROYECTOS.map((proyecto) => (
-                <li key={proyecto.nombre} className="flex flex-col gap-2">
-                  <p className={BODY}>
-                    <strong className="font-bold">{proyecto.nombre}</strong>
-                    {proyecto.link?.kind === "interno" && (
-                      <>
-                        {" "}
-                        —{" "}
-                        <Link href={proyecto.link.href} className="text-purpura underline">
-                          Ver proyecto
-                        </Link>
-                      </>
-                    )}
-                    {proyecto.link?.kind === "externo" && (
-                      <>
-                        {" "}
-                        —{" "}
-                        <a
-                          href={proyecto.link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-purpura underline"
-                        >
-                          Ver demo
-                          <span className="sr-only"> (se abre en una pestaña nueva)</span>
-                        </a>
-                      </>
-                    )}
-                  </p>
-                  <p className={BODY}>{proyecto.descripcion}</p>
-                  <p className="text-[17px] leading-[27px] text-purpura">{proyecto.tecnologias.join(", ")}</p>
-                </li>
-              ))}
-            </ul>
-          </article>)}
 
         <article className="flex flex-col gap-3">
           <h3 className={SUBTITLE}>Educación</h3>

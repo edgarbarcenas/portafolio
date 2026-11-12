@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import Layer, { type LayerSpec } from "./Layer";
 
-// "ISo Edgar" isotype, rebuilt from its Figma layers (59 x 60.606 box).
+// Rebuilt from Figma layers; box is 59 x 60.606 (source of ISO_ASPECT below).
 const LAYERS: ReadonlyArray<LayerSpec> = [
   { src: "/figma/common/iso/v0.svg", inset: "31.01% 15.34% 1.14% 15.48%" },
   { src: "/figma/common/iso/v1.svg", inset: "64.22% 17.88% 5.97% 63.56%" },

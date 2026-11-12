@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element -- Figma raster card art, clipped like the source */
 "use client";
 
 import { useRef, useState } from "react";
@@ -10,12 +9,11 @@ type Props = {
 
 const opposite = (face: CardSpec["initialFace"]) => (face === "front" ? "back" : "front");
 
-// Interactive leaf: flips the card with a smooth 3D turn (500 ms; Figma used an
-// instant swap, softened on request). Reduced motion keeps it instant.
-// Mouse: hover shows the other face, leaving restores the initial one
-// (requested by the developer; Figma used click). Touch toggles on pointerup
-// (not on click, which some mobile browsers delay or drop), keyboard toggles
-// on its Enter/Space click; mouse clicks are ignored because hover owns mice.
+// Flips with a 500ms 3D turn; prefers-reduced-motion keeps it instant
+// (app/globals.css zeroes transition durations globally). Hover flips on
+// mouse; touch toggles on pointerup (click is delayed/dropped on some mobile
+// browsers); keyboard toggles via Enter/Space click. Mouse clicks are
+// ignored because hover already owns mice.
 export default function ExperienciaCard({ card }: Props) {
   const [hovered, setHovered] = useState(false);
   const [toggled, setToggled] = useState(false);
@@ -55,7 +53,7 @@ export default function ExperienciaCard({ card }: Props) {
         className="relative block size-full transition-transform duration-500 ease-in-out [transform-style:preserve-3d]"
         style={{ transform: isFront ? "rotateY(0deg)" : "rotateY(180deg)" }}
       >
-        {/* Front face. The hidden face is inert so it is neither read nor focusable. */}
+        {/* inert when hidden, so it is neither read nor focusable. */}
         <span
           className="absolute inset-0 block overflow-hidden [backface-visibility:hidden]"
           inert={!isFront}
@@ -85,7 +83,7 @@ export default function ExperienciaCard({ card }: Props) {
             </p>
           </div>
         </span>
-        {/* Back face, pre-turned so it reads correctly once flipped. */}
+        {/* Pre-turned so it reads correctly once flipped. */}
         <span
           className="absolute inset-0 block overflow-hidden bg-purpura py-[26px] [backface-visibility:hidden] [transform:rotateY(180deg)]"
           inert={isFront}

@@ -1,7 +1,3 @@
-// Picks the paw variant that stays visible on whatever is under a print:
-// the purple paw on light surfaces, the light paw (white + lila) on dark
-// ones such as the purple contact section or the card backs.
-
 export const DARK_LUMINANCE = 0.3;
 
 // "rgb(r, g, b)" / "rgba(r, g, b, a)" → [r, g, b, a] (0–255, alpha 0–1).

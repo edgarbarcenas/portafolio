@@ -8,8 +8,8 @@ export type CardSpec = {
   name: string;
   art: string;
   initialFace: CardFace;
-  // Figma keeps a trailing space on the first title word (see spec note);
-  // kept verbatim on both the front title and the back heading.
+  // Figma keeps a trailing space on the first title word; kept verbatim on
+  // both the front title and the back heading.
   titleLine1: string;
   titleLine2: string;
   frontSize1: number;

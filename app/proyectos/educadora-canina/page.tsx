@@ -10,7 +10,6 @@ export const metadata: Metadata = {
     "Plataforma de gestión de citas para una escuela de educación canina: autenticación, panel administrativo, pagos online y agenda interactiva.",
 };
 
-// Figma screen 02. Contact uses the isotype variant, as in the design.
 export default function EducadoraCaninaPage() {
   return (
     <>

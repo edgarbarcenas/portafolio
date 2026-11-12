@@ -1,11 +1,8 @@
-/* eslint-disable @next/next/no-img-element -- Rating-star vector repeated per star (the level is also given as sr-only text); not a photographic asset next/image optimises. */
 import SkillIcon from "@/components/atoms/SkillIcon";
 import type { SkillCategory } from "@/lib/habilidades/skills";
 
-// One Habilidades card: a category title plus a row per skill (icon, its
-// star rating out of 5, label). Padding is 30px on every side per the T-05
-// spec — Figma's own 50px right padding is unused because content never
-// reaches it.
+// Padding is 30px on every side; Figma's own 50px right padding is unused
+// since content never reaches it.
 export default function SkillCard({ category }: { category: SkillCategory }) {
   return (
     <article

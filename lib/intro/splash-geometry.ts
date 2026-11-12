@@ -5,8 +5,7 @@ import type { SplashState } from "./splash-machine";
 type Origin = { x: number; y: number; rot: number };
 
 // Figma origins (x, y = top-left of the rotated box, rot = CCW degrees),
-// local to the 600x482 splash box, one entry per state. Read from
-// .claude/parallel/specs/T-02-intro.md.
+// local to the 600x482 splash box, one entry per state.
 export const PERRO_ORIGIN: Record<SplashState, Origin> = {
   Default: { x: 195, y: 511.9, rot: 178.1 },
   V5: { x: 195, y: 511.9, rot: 178.1 },

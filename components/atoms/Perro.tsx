@@ -1,10 +1,8 @@
 import type { CSSProperties } from "react";
 import Layer from "./Layer";
 
-// "Perro" illustration (Figma component 3001:9) as placed in the screens: a
-// 60 x 224 box whose 54 vector layers stretch with it. Two art sets exist:
-// the intro dog, and the contact dog whose body carries a lime outline.
-// Insets are top/right/bottom/left %, from the design context.
+// 54 vector layers (top/right/bottom/left % insets) forming the dog art; two
+// sets exist, the intro dog and the contact dog (lime outline on its body).
 const INSETS: ReadonlyArray<[string, "screen" | "multiply" | undefined]> = [
   ["0 47.77% 75.33% 14.1%", undefined],
   ["0.49% 57.88% 75.35% 14.09%", "screen"],
@@ -75,7 +73,6 @@ type Props = {
   style?: CSSProperties;
 };
 
-// Decorative. The box is 60 x 224 unless the caller overrides width/height.
 export default function Perro({ art, className, style }: Props) {
   const dir = ART_DIR[art];
   return (

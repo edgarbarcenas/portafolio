@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element -- Figma vector art */
 import IsoEdgar from "@/components/atoms/IsoEdgar";
 
 // Site footer (Figma library component "Navigation / Variant4", 1440 x 194):

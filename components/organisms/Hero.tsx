@@ -3,8 +3,7 @@ import ScaleToFit from "@/components/atoms/ScaleToFit";
 import Banner from "@/components/molecules/Banner";
 
 // Home hero, Figma screen 01 ("Elementos banner" + left column), 1440 x 767.
-// Geometry below is section-relative, matching the handoff at the 1440 px
-// reference; see .claude/parallel/specs/T-03-hero-tech.md.
+// Geometry below is section-relative, matching the handoff at the 1440 px reference.
 export default function Hero() {
   return (
     <section
@@ -21,7 +20,6 @@ export default function Hero() {
 
         <h1 className="relative h-[164px] w-[374px] max-w-full xl:absolute xl:left-0 xl:top-[100px]">
           <span className="sr-only">Edgar Barcenas</span>
-          {/* eslint-disable-next-line @next/next/no-img-element -- Figma vector wordmark, exact pixel geometry */}
           <img
             src="/figma/inicio/wordmark.svg"
             alt=""
