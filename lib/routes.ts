@@ -1,7 +1,7 @@
 // Proposed routes from the Figma handoff note; not published URLs.
 export const ROUTES = {
   home: "/",
-  bio: "/bio",
+  cv: "/cv",
   educadoraCanina: "/proyectos/educadora-canina",
 } as const;
 

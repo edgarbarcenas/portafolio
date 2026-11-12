@@ -2,7 +2,7 @@
 export const MOTION = {
   introStepMs: 800, // splash variant change on click, ease-in-out
   introDragMs: 1200, // internal drag Default -> Variant5, linear
-  introExitMs: 1500, // intro -> home, smart animate (dissolve), ease-in-out
+  introExitMs: 700, // intro -> home fade (Figma had 1500ms; shortened on request)
   hoverMs: 800, // header banner + bio star, linear
   scrollMs: 300, // nav anchor scroll, ease-in-out
   chipMs: 200, // Next.js chip pressed state, MD3 curve

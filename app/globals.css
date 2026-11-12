@@ -57,7 +57,7 @@ html[data-intro="show"] {
   }
 }
 
-/* Footprint trail (components/inicio/huellas): appear 250ms (scale +
+/* Footprint trail (components/organisms/HuellasTrail.tsx): appear 250ms (scale +
    opacity), hold 2s, fade 1.2s — 3450ms in total, matching trail.ts. */
 @keyframes huella {
   0% {

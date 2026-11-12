@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import SiteNav from "@/components/nav/SiteNav";
-import SiteFooter from "@/components/footer/SiteFooter";
-import EducadoraCaninaHero from "@/components/proyecto/EducadoraCaninaHero";
-import Contacto from "@/components/contacto/Contacto";
+import SiteNav from "@/components/organisms/SiteNav";
+import SiteFooter from "@/components/organisms/SiteFooter";
+import EducadoraCaninaHero from "@/components/organisms/EducadoraCaninaHero";
+import Contacto from "@/components/organisms/Contacto";
 
 export const metadata: Metadata = {
   title: "Educadora Canina · Proyectos · Edgar Barcenas",

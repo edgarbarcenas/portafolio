@@ -1,13 +1,13 @@
-import IntroOverlay from "@/components/intro/IntroOverlay";
-import SiteNav from "@/components/nav/SiteNav";
-import SiteFooter from "@/components/footer/SiteFooter";
-import Hero from "@/components/inicio/hero/Hero";
-import Tecnologias from "@/components/inicio/tecnologias/Tecnologias";
-import Experiencia from "@/components/inicio/experiencia/Experiencia";
-import Proyectos from "@/components/inicio/proyectos/Proyectos";
-import Habilidades from "@/components/inicio/habilidades/Habilidades";
-import Contacto from "@/components/contacto/Contacto";
-import HuellasTrail from "@/components/inicio/huellas/HuellasTrail";
+import IntroOverlay from "@/components/organisms/IntroOverlay";
+import SiteNav from "@/components/organisms/SiteNav";
+import SiteFooter from "@/components/organisms/SiteFooter";
+import Hero from "@/components/organisms/Hero";
+import Tecnologias from "@/components/organisms/Tecnologias";
+import Experiencia from "@/components/organisms/Experiencia";
+import Proyectos from "@/components/organisms/Proyectos";
+import Habilidades from "@/components/organisms/Habilidades";
+import Contacto from "@/components/organisms/Contacto";
+import HuellasTrail from "@/components/organisms/HuellasTrail";
 
 // Figma screen 01 (home), with screen 00 (intro) as an overlay shown once per
 // session. Section order follows the handoff note.
