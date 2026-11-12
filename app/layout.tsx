@@ -23,7 +23,7 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: "Edgar Barcenas · Desarrollador Full Stack",
   description:
-    "Portafolio de Edgar Barcenas, desarrollador Full Stack: Next.js, Angular, NestJS, Prisma y Supabase.",
+    "Portafolio de Edgar Barcenas, desarrollador Full Stack: Angular, NestJS, Next.js, React y Google Cloud Platform.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

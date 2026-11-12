@@ -53,7 +53,7 @@ export default function Perfil() {
         </p>
 
         <p className="text-[20px] font-semibold leading-[30px] text-negro xl:absolute xl:left-[522px] xl:top-[408px] xl:w-[557px]">
-          Desarrollador Full Stack | Next.js | Angular | NestJS | Prisma | Supabase
+          Desarrollador Full Stack | Angular | NestJS | Next.js | React | Google Cloud Platform
         </p>
       </div>
     </section>

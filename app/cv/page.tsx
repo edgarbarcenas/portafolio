@@ -13,7 +13,7 @@ import { placementStyle } from "@/lib/placement";
 export const metadata: Metadata = {
   title: "CV · Edgar Barcenas",
   description:
-    "Desarrollador de software con experiencia en frontend y backend, especializado en React, Angular, Next.js, NestJS y Prisma.",
+    "Desarrollador de software con experiencia en frontend y backend, especializado en Angular, NestJS, Next.js, React y Google Cloud Platform.",
 };
 
 // Figma screen 03. Page-relative layout at 1440: nav 0–143, profile 144–682,

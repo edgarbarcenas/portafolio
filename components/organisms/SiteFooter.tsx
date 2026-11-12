@@ -43,7 +43,7 @@ export default function SiteFooter() {
         <div className="mx-auto flex max-w-[1440px] flex-col items-center gap-4 px-6 pb-10 pt-12 xl:relative xl:block xl:h-[131px] xl:p-0">
           <IsoEdgar width={59} className="xl:absolute xl:left-[168px] xl:top-[41px]" />
           <p className="text-center font-sans text-[16px] font-semibold leading-[24px] text-white xl:absolute xl:left-[564px] xl:top-[65px] xl:whitespace-nowrap xl:text-left xl:text-[20px] xl:leading-[30px]">
-            Desarrollador Full Stack | Next.js | Angular | NestJS | Prisma | Supabase
+            Desarrollador Full Stack | Angular | NestJS | Next.js | React | Google Cloud Platform
           </p>
         </div>
       </div>

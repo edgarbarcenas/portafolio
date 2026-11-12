@@ -249,7 +249,7 @@ export default function IntroOverlay() {
         <header className="flex shrink-0 items-center gap-3 bg-purpura px-4" style={{ height: headerH }}>
           <IsoEdgar width={40} />
           <p className="font-sans text-[12px] font-semibold leading-[16px] text-white">
-            Desarrollador Full Stack | Next.js | Angular | NestJS | Prisma | Supabase
+            Desarrollador Full Stack | Angular | NestJS | Next.js | React | Google Cloud Platform
           </p>
         </header>
         <div
@@ -344,7 +344,7 @@ export default function IntroOverlay() {
             className="absolute whitespace-nowrap font-sans font-semibold text-white"
             style={{ left: 564 + fill.dx, top: 71, fontSize: 20, lineHeight: "30px" }}
           >
-            Desarrollador Full Stack | Next.js | Angular | NestJS | Prisma | Supabase
+            Desarrollador Full Stack | Angular | NestJS | Next.js | React | Google Cloud Platform
           </p>
         </div>
 

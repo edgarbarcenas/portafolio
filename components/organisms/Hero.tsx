@@ -15,7 +15,7 @@ export default function Hero() {
           positioning on the same elements. */}
       <div className="flex flex-col gap-10 xl:absolute xl:left-[180px] xl:top-[218px] xl:block xl:w-[557px] xl:gap-0">
         <p className="font-sans text-[20px] font-semibold leading-[30px] xl:absolute xl:inset-x-0 xl:top-0">
-          Desarrollador Full Stack | Next.js | Angular | NestJS | Prisma | Supabase
+          Desarrollador Full Stack | Angular | NestJS | Next.js | React | Google Cloud Platform
         </p>
 
         <h1 className="relative h-[164px] w-[374px] max-w-full xl:absolute xl:left-0 xl:top-[100px]">
