@@ -7,7 +7,7 @@ describe("Tecnologias", () => {
     render(<Tecnologias />);
 
     const list = screen.getByRole("list", { name: "Tecnologías principales" });
-    const names = ["Next.js", "Angular", "NestJS", "Prisma", "Supabase"];
+    const names = ["Next.js", "Angular", "NestJS", "React", "Google Cloud Platform"];
 
     for (const name of names) {
       expect(screen.getByAltText(name)).toBeTruthy();

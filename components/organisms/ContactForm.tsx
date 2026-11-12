@@ -25,16 +25,18 @@ function readInput(form: HTMLFormElement): ContactInput {
   };
 }
 
+function focusFirstInvalid(form: HTMLFormElement | null, errors: FieldErrors) {
+  const first = FIELD_ORDER.find((name) => errors[name]);
+  const field = first ? form?.elements.namedItem(first) : null;
+  if (field instanceof HTMLElement) field.focus();
+}
+
 export default function ContactForm() {
   const [state, formAction, isPending] = useActionState(enviarMensaje, initialContactFormState);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitted, setSubmitted] = useState(false);
 
   const formRef = useRef<HTMLFormElement>(null);
-  const nombreRef = useRef<HTMLInputElement>(null);
-  const correoRef = useRef<HTMLInputElement>(null);
-  const mensajeRef = useRef<HTMLTextAreaElement>(null);
-  const fieldRefs = { nombre: nombreRef, correo: correoRef, mensaje: mensajeRef };
 
   const nombreId = useId();
   const correoId = useId();
@@ -58,12 +60,9 @@ export default function ContactForm() {
     if (state.status === "sent") formRef.current?.reset();
   }, [state]);
 
-  // Focusing is a genuine side effect (not state), so it stays in an effect.
   useEffect(() => {
     if (state.status !== "invalid") return;
-    const refs = { nombre: nombreRef, correo: correoRef, mensaje: mensajeRef };
-    const first = FIELD_ORDER.find((name) => state.errors[name]);
-    if (first) refs[first].current?.focus();
+    focusFirstInvalid(formRef.current, state.errors);
   }, [state]);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -72,8 +71,7 @@ export default function ContactForm() {
     setErrors(found);
     if (hasErrors(found)) {
       event.preventDefault();
-      const first = FIELD_ORDER.find((name) => found[name]);
-      if (first) fieldRefs[first].current?.focus();
+      focusFirstInvalid(event.currentTarget, found);
     }
   }
 
@@ -98,7 +96,6 @@ export default function ContactForm() {
           placeholder="Nombre"
           error={errors.nombre}
           onBlur={handleBlur}
-          inputRef={nombreRef}
         />
         <TextField
           id={fieldIds.correo}
@@ -108,7 +105,6 @@ export default function ContactForm() {
           placeholder="Correo electrónico"
           error={errors.correo}
           onBlur={handleBlur}
-          inputRef={correoRef}
         />
         <TextAreaField
           id={fieldIds.mensaje}
@@ -117,7 +113,6 @@ export default function ContactForm() {
           placeholder="Escribe tu mensaje aquí"
           error={errors.mensaje}
           onBlur={handleBlur}
-          inputRef={mensajeRef}
         />
       </div>
       <div className="flex flex-col gap-[14px] xl:w-[225px]">

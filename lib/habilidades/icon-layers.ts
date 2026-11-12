@@ -93,6 +93,7 @@ export const SKILL_ICONS = {
   // brand-free line icons.
   nestjs: simple({ x: 7, y: 7.72, w: 36, h: 34.56 }, "/figma/inicio/logo-nestjs.svg"),
   firebase: simple({ x: 9, y: 9, w: 32, h: 32 }, "/figma/skills/firebase.svg"),
+  postgresql: simple({ x: 9, y: 9, w: 32, h: 32 }, "/figma/skills/postgresql.svg"),
   jest: simple({ x: 9, y: 9, w: 32, h: 32 }, "/figma/skills/jest.svg"),
   swagger: simple({ x: 9, y: 9, w: 32, h: 32 }, "/figma/skills/swagger.svg"),
   jwt: simple({ x: 10, y: 10, w: 30, h: 30 }, "/figma/skills/jwt.svg"),

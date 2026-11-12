@@ -14,6 +14,18 @@ const BODY = "text-[17px] leading-[27px] text-negro";
 // Figma screen 03 "Bio", block page y 777+, bg white, replaces the former
 // Trayectoria paragraph with the developer's CV (skills are skipped — the
 // home page already has a Habilidades section).
+function Logros({ items }: { items: readonly string[] }) {
+  return (
+    <ul className="list-disc pl-5">
+      {items.map((logro) => (
+        <li key={logro} className={BODY}>
+          {logro}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export default function Curriculum() {
   return (
     <section className="relative bg-blanco">
@@ -37,13 +49,7 @@ export default function Curriculum() {
                   <span className="text-purpura">({item.periodo})</span>
                 </p>
                 {item.logros.length > 0 && (
-                  <ul className="list-disc pl-5">
-                    {item.logros.map((logro) => (
-                      <li key={logro} className={BODY}>
-                        {logro}
-                      </li>
-                    ))}
-                  </ul>
+                  <Logros items={item.logros} />
                 )}
                 {item.etapas && item.etapas.length > 0 && (
                   <ul className="flex flex-col gap-3 pl-5">
@@ -58,13 +64,7 @@ export default function Curriculum() {
                             </>
                           )}
                         </p>
-                        <ul className="list-disc pl-5">
-                          {etapa.logros.map((logro) => (
-                            <li key={logro} className={BODY}>
-                              {logro}
-                            </li>
-                          ))}
-                        </ul>
+                        <Logros items={etapa.logros} />
                       </li>
                     ))}
                   </ul>

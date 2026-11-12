@@ -36,16 +36,20 @@ describe("Habilidades", () => {
     expect(rowsOf("Arquitectura")).toEqual([
       "Microservicios:5", "Arquitectura hexagonal:5", "Event-Driven:5", "gRPC:4", "Multi-tenant:4",
     ]);
-    expect(rowsOf("Backend")).toEqual(["NestJS:5", "Node.js:4", "Spring Boot:3", "Java:3", "PHP:3"]);
-    expect(rowsOf("Frontend")).toEqual([
-      "Angular:5", "React:4", "Next JS:4", "TailwindCSS:4", "Shadcn:4", "React Native:3",
+    expect(rowsOf("Backend")).toEqual([
+      "Node.js:4", "NestJS:5", "PHP:3", "Java:3", "Spring Boot:3",
     ]);
-    expect(rowsOf("Bases de Datos")).toEqual(["MySQL:5", "Prisma:5", "Supabase:4", "MongoDB:3"]);
+    expect(rowsOf("Frontend")).toEqual([
+      "Angular:5", "React:4", "Next JS:4", "React Native:3", "TailwindCSS:4", "Shadcn:4",
+    ]);
+    expect(rowsOf("Bases de Datos")).toEqual([
+      "MySQL:5", "Prisma:5", "PostgreSQL:4", "Supabase:4", "Firebase:4", "MongoDB:3",
+    ]);
     expect(rowsOf("Cloud & DevOps")).toEqual([
-      "Google Cloud (GKE, Cloud Run, Pub/Sub):5", "Vercel:5", "Docker:4", "CI/CD:4",
+      "Google Cloud (Cloud Run, GKE, Pub/Sub, Apigee, Firestore):5", "Vercel:5", "Docker:4", "CI/CD:4",
     ]);
     expect(rowsOf("Herramientas")).toEqual([
-      "Swagger:5", "Jest:4", "JWT / Passport:4", "Firebase:4", "FullCalendar:4", "Redux Toolkit:3",
+      "Swagger:5", "Jest:4", "JWT / Passport:4", "FullCalendar:4", "Redux Toolkit:3",
     ]);
   });
 

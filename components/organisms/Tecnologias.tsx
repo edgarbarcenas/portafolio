@@ -3,7 +3,7 @@ import TechLogo from "@/components/atoms/TechLogo";
 type Logo = {
   src: string;
   alt: string;
-  // NestJS ships at 100 x 96 in the source art; every other logo is 100 x 100.
+  // Height at 100 px width, from each SVG's aspect ratio (they stretch to the box).
   height: number;
 };
 
@@ -11,8 +11,8 @@ const LOGOS: readonly Logo[] = [
   { src: "/figma/inicio/logo-nextjs.svg", alt: "Next.js", height: 100 },
   { src: "/figma/inicio/logo-angular.svg", alt: "Angular", height: 100 },
   { src: "/figma/inicio/logo-nestjs.svg", alt: "NestJS", height: 96 },
-  { src: "/figma/inicio/logo-prisma.svg", alt: "Prisma", height: 100 },
-  { src: "/figma/inicio/logo-supabase.svg", alt: "Supabase", height: 100 },
+  { src: "/figma/skills/react.svg", alt: "React", height: 89 },
+  { src: "/figma/skills/google-cloud.svg", alt: "Google Cloud Platform", height: 100 },
 ];
 
 // Technologies strip, Figma screen 01 ("Logos" box), 1440 x 291.

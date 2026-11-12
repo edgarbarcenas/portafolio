@@ -34,6 +34,11 @@ html {
     outline: 3px solid currentColor;
     outline-offset: 3px;
   }
+
+  /* Programmatic focus targets (e.g. the hero after the intro) are not tab stops. */
+  [tabindex="-1"]:focus {
+    outline: none;
+  }
 }
 
 /* Intro overlay contract (see lib/intro-session.ts): hidden unless the

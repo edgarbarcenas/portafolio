@@ -1,4 +1,3 @@
-import type { RefObject } from "react";
 import type { FieldBaseProps } from "./field-props";
 
 // Figma's text is the placeholder look; a real (visually hidden) label
@@ -12,8 +11,7 @@ export default function TextField({
   error,
   onBlur,
   type = "text",
-  inputRef,
-}: FieldBaseProps & { type?: "text" | "email"; inputRef: RefObject<HTMLInputElement | null> }) {
+}: FieldBaseProps & { type?: "text" | "email" }) {
   const errorId = `${id}-error`;
   return (
     <div className="flex flex-col gap-[8px]">
@@ -26,7 +24,6 @@ export default function TextField({
           {label}
         </label>
         <input
-          ref={inputRef}
           id={id}
           name={name}
           type={type}

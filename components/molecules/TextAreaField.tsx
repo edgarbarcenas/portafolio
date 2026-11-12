@@ -1,4 +1,3 @@
-import type { RefObject } from "react";
 import type { FieldBaseProps } from "./field-props";
 
 export default function TextAreaField({
@@ -8,8 +7,7 @@ export default function TextAreaField({
   placeholder,
   error,
   onBlur,
-  inputRef,
-}: FieldBaseProps & { inputRef: RefObject<HTMLTextAreaElement | null> }) {
+}: FieldBaseProps) {
   const errorId = `${id}-error`;
   return (
     <div className="flex flex-col gap-[8px]">
@@ -22,7 +20,6 @@ export default function TextAreaField({
           {label}
         </label>
         <textarea
-          ref={inputRef}
           id={id}
           name={name}
           rows={7}
