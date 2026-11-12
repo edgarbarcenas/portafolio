@@ -1,0 +1,19 @@
+<svg width="1440" height="898" viewBox="0 0 1440 898" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="01 &#194;&#183; Inicio / Desktop &#194;&#183; 1440" clip-path="url(#clip0_0_1)">
+<g id="03 &#194;&#183; Experiencia / especialidades">
+<path id="Vector 397" d="M1442 0C1456.89 3.38384 1463.28 7.97683 1442 11.9712V897.5C1348 882.333 1184.5 776 876.5 843C650.923 892.07 219 868 0 897.5V0C35.1667 15.1667 155 40.4 353 20C600.5 -5.5 670 15 1111 20C1320.54 22.3758 1410.87 17.8138 1442 11.9712V0Z" fill="url(#paint0_linear_0_1)"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_1" x1="727.834" y1="0" x2="727.834" y2="897.5" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FAFAFA"/>
+<stop stop-color="#EBD4FF"/>
+<stop offset="0.0432692" stop-color="white"/>
+<stop offset="0.923077" stop-color="#F1FFDA"/>
+<stop offset="1" stop-color="#EBD4FF"/>
+</linearGradient>
+<clipPath id="clip0_0_1">
+<rect width="1440" height="4866.68" fill="white" transform="translate(0 -1202)"/>
+</clipPath>
+</defs>
+</svg>

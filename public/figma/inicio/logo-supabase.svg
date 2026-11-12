@@ -1,0 +1,20 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="supabase-icon 1" clip-path="url(#clip0_0_4)">
+<path id="path2" d="M58.4565 98.3386C55.9019 101.556 50.7221 99.793 50.6605 95.6852L49.7604 35.6032H90.1595C97.4768 35.6032 101.558 44.0548 97.0078 49.7856L58.4565 98.3386Z" fill="url(#paint0_linear_0_4)"/>
+<path id="path4" d="M58.4565 98.3386C55.9019 101.556 50.7221 99.793 50.6605 95.6852L49.7604 35.6032H90.1595C97.4768 35.6032 101.558 44.0548 97.0078 49.7856L58.4565 98.3386Z" fill="url(#paint1_linear_0_4)" fill-opacity="0.2"/>
+<path id="path6" d="M42.0265 1.66158C44.5811 -1.5559 49.761 0.207047 49.8226 4.31494L50.217 64.3969H10.3236C3.00598 64.3969 -1.07517 55.9453 3.47512 50.2145L42.0265 1.66158Z" fill="#3ECF8E"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_4" x1="49.7604" y1="48.9249" x2="85.6657" y2="63.9835" gradientUnits="userSpaceOnUse">
+<stop stop-color="#249361"/>
+<stop offset="1" stop-color="#3ECF8E"/>
+</linearGradient>
+<linearGradient id="paint1_linear_0_4" x1="33.8419" y1="27.1296" x2="50.2166" y2="57.9541" gradientUnits="userSpaceOnUse">
+<stop/>
+<stop offset="1" stop-opacity="0"/>
+</linearGradient>
+<clipPath id="clip0_0_4">
+<rect width="100" height="100" fill="white"/>
+</clipPath>
+</defs>
+</svg>

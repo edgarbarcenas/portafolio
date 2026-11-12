@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+/* Tokens taken from the Figma file (variables + observed fills). */
+@theme inline {
+  --color-purpura: #8d4ce2;
+  --color-purpura-oscuro: #621fb8;
+  --color-negro: #000000;
+  --color-black-soft: #2d2d2d;
+  --color-blanco: #ffffff;
+  /* Accent: replaced the Figma neon #9dff00 on request (2026-11-12). */
+  --color-lila: #ebd4ff;
+  --color-crema: #fffcf5;
+  --color-crema-borde: #ffd285;
+  --color-beige: #fbf5ef;
+  --color-on-surface: #1d1b20;
+
+  --font-sans: var(--nf-epilogue);
+  --font-poppins: var(--nf-poppins);
+  --font-roboto: var(--nf-roboto);
+
+  /* Prototype timings (Figma reactions). */
+  --ease-figma: cubic-bezier(0.42, 0, 0.58, 1);
+  --ease-md3: cubic-bezier(0.2, 0, 0, 1);
+}
+
+html {
+  scroll-padding-top: 0;
+}
+
+/* Focus is always visible for keyboard users; currentColor adapts to light
+   text on purple or black surfaces. In the base layer so a component can
+   move the ring with utilities (e.g. the contact fields ring the whole box). */
+@layer base {
+  :focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 3px;
+  }
+}
+
+/* Intro overlay contract (see lib/intro-session.ts): hidden unless the
+   pre-paint script decided to show it. Without JS the portfolio shows. */
+html:not([data-intro="show"]) [data-intro-overlay] {
+  display: none;
+}
+html[data-intro="show"] {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Footprint trail (components/inicio/huellas): appear 250ms (scale +
+   opacity), hold 2s, fade 1.2s — 3450ms in total, matching trail.ts. */
+@keyframes huella {
+  0% {
+    opacity: 0;
+    transform: rotate(var(--huella-rot)) scale(0.6);
+  }
+  7.25% {
+    opacity: 1;
+    transform: rotate(var(--huella-rot)) scale(1);
+  }
+  65.2% {
+    opacity: 1;
+    transform: rotate(var(--huella-rot)) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(var(--huella-rot)) scale(1);
+  }
+}
+.huella-print {
+  animation: huella 3450ms ease-out forwards;
+}
