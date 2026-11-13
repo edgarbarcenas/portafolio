@@ -13,6 +13,8 @@ export type SiteNavProps = {
 export default function SiteNav({ current }: SiteNavProps) {
   const isHome = current === "home";
   const surfaceClass = isHome ? "bg-white/90 text-negro" : "bg-purpura text-blanco";
+  // Full-screen mobile menu: same colours as the bar, but opaque.
+  const panelClass = isHome ? "bg-blanco text-negro" : "bg-purpura text-blanco";
   const logoNav = resolveLogoNav(current);
   const items = NAV_ITEMS.map((item) => ({
     ...item,
@@ -48,7 +50,7 @@ export default function SiteNav({ current }: SiteNavProps) {
       </div>
 
       {/* Responsive proposal (not in Figma): <1280, see MobileNavToggle. */}
-      <MobileNavToggle logoNav={logoNav} items={items} />
+      <MobileNavToggle logoNav={logoNav} items={items} panelClass={panelClass} />
     </nav>
   );
 }

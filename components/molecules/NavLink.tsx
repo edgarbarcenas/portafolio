@@ -14,15 +14,17 @@ type Props = {
   className?: string;
   style?: CSSProperties;
   children: ReactNode;
+  // Runs before navigation (e.g. closing the mobile menu).
+  onClick?: () => void;
   "aria-label"?: AnchorHTMLAttributes<HTMLAnchorElement>["aria-label"];
 };
 
-export default function NavLink({ nav, active, className, style, children, ...aria }: Props) {
+export default function NavLink({ nav, active, className, style, children, onClick, ...aria }: Props) {
   const ariaCurrent = active ? "page" : undefined;
 
   if (nav.kind === "route") {
     return (
-      <Link href={nav.href} className={className} style={style} aria-current={ariaCurrent} {...aria}>
+      <Link href={nav.href} className={className} style={style} aria-current={ariaCurrent} onClick={onClick} {...aria}>
         {children}
       </Link>
     );
@@ -36,6 +38,7 @@ export default function NavLink({ nav, active, className, style, children, ...ar
       aria-current={ariaCurrent}
       onClick={(event) => {
         event.preventDefault();
+        onClick?.();
         scrollToSection(nav.id);
       }}
       {...aria}

@@ -44,17 +44,37 @@ describe("SiteNav", () => {
     expect(links[0].getAttribute("href")).toBe("#contacto");
   });
 
-  it("flips aria-expanded on the mobile menu toggle", async () => {
+  it("opens a full-screen menu dialog and closes it with Cerrar", async () => {
     const user = userEvent.setup();
-    const { getByRole } = render(<SiteNav current="home" />);
+    const { getByRole, queryByRole } = render(<SiteNav current="home" />);
 
     const toggle = getByRole("button", { name: "Menú" });
     expect(toggle.getAttribute("aria-expanded")).toBe("false");
 
     await user.click(toggle);
     expect(toggle.getAttribute("aria-expanded")).toBe("true");
+    const dialog = getByRole("dialog", { name: "Menú" });
+    expect(dialog.className).toContain("fixed inset-0");
+    expect(within(dialog).getAllByRole("link").map((link) => link.textContent).slice(1)).toEqual(LABELS);
+    expect(document.body.style.overflow).toBe("hidden");
 
-    await user.click(toggle);
+    await user.click(within(dialog).getByRole("button", { name: "Cerrar" }));
+    expect(queryByRole("dialog")).toBeNull();
     expect(toggle.getAttribute("aria-expanded")).toBe("false");
+    expect(document.activeElement).toBe(toggle);
+    expect(document.body.style.overflow).toBe("");
+  });
+
+  it("closes the menu with Escape and when an item is picked", async () => {
+    const user = userEvent.setup();
+    const { getByRole, queryByRole } = render(<SiteNav current="proyecto" />);
+
+    await user.click(getByRole("button", { name: "Menú" }));
+    await user.keyboard("{Escape}");
+    expect(queryByRole("dialog")).toBeNull();
+
+    await user.click(getByRole("button", { name: "Menú" }));
+    await user.click(within(getByRole("dialog")).getByRole("link", { name: "Contacto" }));
+    expect(queryByRole("dialog")).toBeNull();
   });
 });
