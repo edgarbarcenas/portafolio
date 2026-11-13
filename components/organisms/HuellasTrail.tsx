@@ -30,6 +30,11 @@ function initialMode(): Mode {
   return window.matchMedia?.("(hover: hover) and (pointer: fine)").matches ? "cursor" : "auto";
 }
 
+// Touch-only devices have no cursor to follow: Auto is the only mode there.
+function readTouchOnly() {
+  return window.matchMedia?.("(hover: none)").matches ?? false;
+}
+
 // Appear (bounce) → hold → fade, as one Web Animation. With reduced motion
 // only opacity changes, no scale.
 function lifeKeyframes(reduced: boolean): Keyframe[] {
@@ -61,7 +66,8 @@ export default function HuellasTrail() {
   const layerRef = useRef<HTMLDivElement>(null);
   const stored = useSyncExternalStore<Mode | null>(subscribeNever, initialMode, () => null);
   const [override, setOverride] = useState<Mode | null>(null);
-  const mode = override ?? stored;
+  const touchOnly = useSyncExternalStore(subscribeNever, readTouchOnly, () => false);
+  const mode = touchOnly ? "auto" : (override ?? stored);
 
   useEffect(() => {
     const layer = layerRef.current;
@@ -157,14 +163,14 @@ export default function HuellasTrail() {
     document.addEventListener("visibilitychange", onVisibility);
     if (mode === "cursor") {
       window.addEventListener("pointermove", onMove, { passive: true });
-      document.addEventListener("mouseout", onOut);
+      window.addEventListener("mouseout", onOut);
     }
 
     return () => {
       stop();
       document.removeEventListener("visibilitychange", onVisibility);
       window.removeEventListener("pointermove", onMove);
-      document.removeEventListener("mouseout", onOut);
+      window.removeEventListener("mouseout", onOut);
       live.splice(0).forEach((el) => el.remove());
     };
   }, [mode]);
@@ -182,7 +188,7 @@ export default function HuellasTrail() {
   return (
     <>
       <div ref={layerRef} aria-hidden="true" className="pointer-events-none fixed inset-0 z-40 overflow-hidden" />
-      {mode && (
+      {mode && !touchOnly && (
         <button
           type="button"
           onClick={toggle}

@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -29,9 +30,21 @@ const SPLASH = { x: 359, y: 162, w: 600, h: 482 } as const;
 // Compact (phone) layout: side gutter and where the scene starts (below the bar).
 const COMPACT_GUTTER = 16;
 const SCENE_TOP = NAV_BAR_TOP + NAV_BAR_H;
-// Centre of the paw + "Scroll" group in the frame (paw 619,439 80x66; label below).
-const SCROLL_SPOT = { x: 659, y: 488 } as const;
 const COMPACT_MAX_W = 768;
+const COMPACT_HEADER_H = 56;
+// Splash x 0-640 covers the dog's farthest reach (V7 at x 635.6); the
+// Default ball (x 897) rolls in from off-screen on the first step.
+const COMPACT_SCENE_W = 640;
+// Edgar's feet: the bottom of the splash box, in frame px.
+const FEET_Y = SPLASH.y + SPLASH.h;
+// Strip kept free under the feet for the Scroll button (button + margins).
+const COMPACT_SCROLL_RESERVE = 100;
+
+const TITLE_FULL = "Desarrollador Full Stack Senior | Tech Lead | NestJS | Microservicios | GCP | Angular | Next.js";
+const TITLE_SHORT = "Full Stack Senior | Tech Lead";
+// The full title is anchored by its right edge where the previous, shorter
+// one ended (x 1388 at the 1440 reference), so it never clips the frame.
+const TITLE_RIGHT = 52;
 
 // Letter-spacing on "Scroll" is 8% in Figma; CSS letter-spacing takes a
 // length, so it is pre-multiplied by the 14px font size here (1.12px).
@@ -58,6 +71,22 @@ function readShownOnServer() {
 const SCROLL_LOCK_MARGIN_MS = 200;
 const SWIPE_THRESHOLD_PX = 40;
 
+type Box = { w: number; h: number };
+
+// Phone layout of the Figma scene inside the stage (px): scaled so the whole
+// character range fits the width (or the height, if shorter), feet resting on
+// the Scroll reserve, centred horizontally. `bottom` is the stage's bottom
+// edge in frame px, so the purple backgrounds can stretch down to it.
+function compactScene(stage: Box) {
+  const s = Math.max(
+    0.1,
+    Math.min((stage.w - 2 * COMPACT_GUTTER) / COMPACT_SCENE_W, (stage.h - COMPACT_SCROLL_RESERVE) / (FEET_Y - SCENE_TOP)),
+  );
+  const tx = (stage.w - COMPACT_SCENE_W * s) / 2 - SPLASH.x * s;
+  const ty = stage.h - COMPACT_SCROLL_RESERVE - FEET_Y * s;
+  return { s, tx, clipTop: ty + SCENE_TOP * s, bottom: (stage.h - ty) / s };
+}
+
 // Intro overlay (Figma screen 00): a full-viewport dialog shown once per
 // session (lib/intro-session.ts decides this before paint). The illustration
 // advances by click (Figma) and by scroll: wheel, swipe or arrow keys move one
@@ -75,7 +104,18 @@ export default function IntroOverlay() {
   const transitionRef = useRef(transition);
   const lockUntilRef = useRef(0);
   const exitRef = useRef<() => void>(() => {});
+  const [stage, setStage] = useState<Box | null>(null);
   const visible = shown && !closed;
+
+  // Compact layout: the scene is sized from the space left under the text.
+  const observeStage = useCallback((el: HTMLDivElement | null) => {
+    if (!el || typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(([entry]) => {
+      setStage({ w: entry.contentRect.width, h: entry.contentRect.height });
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     transitionRef.current = transition;
@@ -238,59 +278,73 @@ export default function IntroOverlay() {
 
   // Responsive proposal (not in Figma, which only designs 1440): below 768px
   // the 1440x682 frame would shrink to a thin strip with a ~20px Scroll
-  // button. Phones get a vertical recomposition instead: black header, the
-  // same splash scaled to the width, a large Scroll button, and taps on any
-  // empty area advance the illustration (swipes already do).
+  // button. Phones get a vertical recomposition instead: a one-line header,
+  // name and tagline at the top, the scene grouped at the bottom and the
+  // Scroll button centred under it. Taps on any empty area advance the
+  // illustration (swipes already do). Height is 100svh (100vh fallback) so
+  // nothing hides behind the iOS Safari toolbar.
   if (viewport.w < COMPACT_MAX_W) {
-    const headerH = 72;
-    const splashScale = Math.min((viewport.w - 2 * COMPACT_GUTTER) / SPLASH.w, (viewport.h - headerH) / (FRAME.h - SCENE_TOP));
+    const scene = stage && compactScene(stage);
     return (
-      <div {...rootProps} className="fixed inset-0 z-50 flex touch-none flex-col overflow-hidden bg-white">
-        <header className="flex shrink-0 items-center gap-3 bg-purpura px-4" style={{ height: headerH }}>
+      <div
+        {...rootProps}
+        className="fixed inset-x-0 top-0 z-50 flex h-[100vh] touch-none flex-col overflow-hidden bg-white supports-[height:100svh]:h-[100svh]"
+      >
+        <header className="flex shrink-0 items-center gap-3 bg-purpura px-4" style={{ height: COMPACT_HEADER_H }}>
           <IsoEdgar width={40} />
-          <p className="font-sans text-[12px] font-semibold leading-[16px] text-white">
-            Desarrollador Full Stack | Angular | NestJS | Next.js | React | Google Cloud Platform
-          </p>
+          <p className="truncate font-sans text-[15px] font-semibold leading-[20px] text-white">{TITLE_SHORT}</p>
         </header>
         <div
-          className="relative flex flex-1 flex-col justify-end overflow-hidden"
+          className="flex min-h-0 flex-1 flex-col"
           onClick={(event) => {
             // Any tap outside a button advances the illustration.
             if (!(event.target as HTMLElement).closest("button")) advance();
           }}
         >
-          {/* The Figma scene below the nav bar (frame y 137–682), scaled so the
-              splash fills the width, cropped around it and anchored to the
-              bottom edge like on desktop: both purple backgrounds bleed off the
-              bottom where the design puts them. */}
-          <div className="relative w-full shrink-0 overflow-hidden" style={{ height: (FRAME.h - SCENE_TOP) * splashScale }}>
-            <div
-              className="absolute left-0 top-0"
-              style={{
-                width: FRAME.w,
-                height: FRAME.h,
-                transform: `translate(${COMPACT_GUTTER - SPLASH.x * splashScale}px, ${-SCENE_TOP * splashScale}px) scale(${splashScale})`,
-                transformOrigin: "top left",
-              }}
-            >
-              <img src="/figma/intro/bg-left.svg" alt="" aria-hidden="true" draggable={false} className="pointer-events-none absolute block max-w-none" style={{ left: 0, top: -8, width: 609, height: 693 }} />
-              <img src="/figma/intro/bg-right.svg" alt="" aria-hidden="true" draggable={false} className="pointer-events-none absolute block max-w-none" style={{ left: 640, top: 1, width: 801, height: 691 }} />
-              <div className="absolute" style={{ left: SPLASH.x, top: SPLASH.y, width: SPLASH.w, height: SPLASH.h }}>
-                <Splash transition={transition} onAdvance={advance} onDrag={dragAdvance} />
+          <div className="shrink-0 px-6 pt-6">
+            <img
+              src="/figma/inicio/wordmark.svg"
+              alt="Edgar Barcenas"
+              draggable={false}
+              className="block h-auto w-[clamp(200px,64vw,280px)]"
+            />
+            <p className="mt-3 font-sans text-[15px] leading-[22px] text-negro">
+              Focus programming is my passion and my every day, all day ;D
+            </p>
+          </div>
+          <div ref={observeStage} className="relative min-h-0 flex-1 overflow-hidden">
+            {scene && (
+              // Clipped at the Figma nav bar's bottom edge (frame y 137); the
+              // backgrounds stretch (preserveAspectRatio="none") down to the
+              // stage bottom, behind the Scroll button.
+              <div className="absolute inset-x-0 bottom-0 overflow-hidden" style={{ top: scene.clipTop }}>
+                <div
+                  className="absolute left-0 top-0"
+                  style={{
+                    width: FRAME.w,
+                    height: scene.bottom,
+                    transform: `translate(${scene.tx}px, ${-SCENE_TOP * scene.s}px) scale(${scene.s})`,
+                    transformOrigin: "top left",
+                  }}
+                >
+                  <img src="/figma/intro/bg-left.svg" alt="" aria-hidden="true" draggable={false} className="pointer-events-none absolute block max-w-none" style={{ left: 0, top: -8, width: 609, height: Math.max(693, scene.bottom + 8) }} />
+                  <img src="/figma/intro/bg-right.svg" alt="" aria-hidden="true" draggable={false} className="pointer-events-none absolute block max-w-none" style={{ left: 640, top: 1, width: 801, height: Math.max(691, scene.bottom - 1) }} />
+                  <div className="absolute" style={{ left: SPLASH.x, top: SPLASH.y, width: SPLASH.w, height: SPLASH.h }}>
+                    <Splash transition={transition} onAdvance={advance} onDrag={dragAdvance} />
+                  </div>
+                </div>
               </div>
-            </div>
-            {/* Scroll at its Figma spot next to the dog, enlarged for touch. */}
+            )}
+            {/* Centred under the scene, clear of the home indicator; the white
+                pill keeps the paw legible where it overlaps the purple. */}
             <button
               type="button"
               onClick={exit}
               aria-label="Scroll — entrar al portafolio"
-              className="absolute flex min-h-11 min-w-11 -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-0.5 border-0 bg-transparent p-1"
-              style={{
-                left: COMPACT_GUTTER + (SCROLL_SPOT.x - SPLASH.x) * splashScale,
-                top: (SCROLL_SPOT.y - SCENE_TOP) * splashScale,
-              }}
+              className="absolute left-1/2 flex min-h-11 min-w-11 -translate-x-1/2 flex-col items-center gap-0.5 rounded-2xl border-0 bg-white/90 px-3 py-1 shadow-[0_1px_3px_rgba(0,0,0,0.2)]"
+              style={{ bottom: "max(12px, env(safe-area-inset-bottom))" }}
             >
-              <Huellita style={{ width: 56, height: 56 / HUELLITA_ASPECT }} />
+              <Huellita style={{ width: 48, height: 48 / HUELLITA_ASPECT }} />
               <span className="font-sans text-[13px] font-bold leading-[18px] text-negro" style={{ letterSpacing: `${SCROLL_LETTER_SPACING}px` }}>
                 Scroll
               </span>
@@ -342,9 +396,9 @@ export default function IntroOverlay() {
           <IsoEdgar width={59} style={{ position: "absolute", left: 168 + fill.dx, top: 47 }} />
           <p
             className="absolute whitespace-nowrap font-sans font-semibold text-white"
-            style={{ left: 564 + fill.dx, top: 71, fontSize: 20, lineHeight: "30px" }}
+            style={{ right: TITLE_RIGHT + fill.dx, top: 71, fontSize: 20, lineHeight: "30px" }}
           >
-            Desarrollador Full Stack | Angular | NestJS | Next.js | React | Google Cloud Platform
+            {TITLE_FULL}
           </p>
         </div>
 
