@@ -1,29 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ROUTES } from "@/lib/routes";
-
-type Project = {
-  id: string;
-  image: { src: string; alt: string };
-  title: string;
-  description: string;
-  href: string;
-};
-
-// Only real projects are listed. Figma showed two more cards that do not
-// exist; they were removed on request and their grid slots stay empty.
-const PROJECTS: Project[] = [
-  {
-    id: "educadora-canina",
-    image: {
-      src: "/figma/inicio/project-educadora.png",
-      alt: "Logotipo de Educadora Canina Chile",
-    },
-    title: "Educadora Canina",
-    description: "Plataforma de gestión de citas para una escuela de educación canina.",
-    href: ROUTES.educadoraCanina,
-  },
-];
+import { PROJECTS, projectHref } from "@/lib/proyectos/proyectos-data";
 
 export default function Proyectos() {
   return (
@@ -36,36 +13,38 @@ export default function Proyectos() {
       </h2>
       {/* Responsive proposal (not in Figma): 1 col mobile, 2 tablet, 3 desktop */}
       <ul className="grid w-full grid-cols-1 gap-x-[67.5px] gap-y-10 md:grid-cols-2 xl:grid-cols-3">
-        {PROJECTS.map((project) => {
-          const content = (
-            <article className="flex flex-col gap-[25px]">
-              <Image
-                src={project.image.src}
-                alt={project.image.alt}
-                width={315}
-                height={315}
-                sizes="(min-width: 1280px) 315px, (min-width: 768px) 45vw, 90vw"
-                className="h-auto w-full max-w-[315px]"
-              />
-              <div className="flex flex-col gap-[10px]">
-                <h3 className="font-sans text-[20px] leading-[30px] font-semibold text-negro">
-                  {project.title}
-                </h3>
-                <p className="font-sans text-[17px] leading-[27px] text-black-soft">
-                  {project.description}
-                </p>
-              </div>
-            </article>
-          );
-
-          return (
-            <li key={project.id} className="mx-auto w-full max-w-[315px] xl:mx-0">
-              <Link href={project.href} className="block">
-                {content}
-              </Link>
-            </li>
-          );
-        })}
+        {PROJECTS.map((project) => (
+          <li key={project.slug} className="mx-auto w-full max-w-[315px] xl:mx-0">
+            <Link href={projectHref(project.slug)} className="group block">
+              <article className="flex flex-col gap-[25px]">
+                {/* Square tile in place of a screenshot: the client systems are
+                    internal, so the card shows the client's official logo. */}
+                <div className="flex aspect-square w-full max-w-[315px] flex-col items-center justify-center gap-6 bg-[#f7f2fa] px-8 transition-colors group-hover:bg-lila">
+                  <Image
+                    src={project.client.logo.src}
+                    alt={project.client.logo.alt}
+                    width={project.client.logo.width}
+                    height={project.client.logo.height}
+                    className="h-auto w-[200px]"
+                  />
+                  <p className="text-center font-sans text-[15px] leading-[22px] text-black-soft">
+                    {project.role}
+                    <br />
+                    {project.period}
+                  </p>
+                </div>
+                <div className="flex flex-col gap-[10px]">
+                  <h3 className="font-sans text-[20px] leading-[30px] font-semibold text-negro">
+                    {project.title}
+                  </h3>
+                  <p className="font-sans text-[17px] leading-[27px] text-black-soft">
+                    {project.summary}
+                  </p>
+                </div>
+              </article>
+            </Link>
+          </li>
+        ))}
       </ul>
     </section>
   );

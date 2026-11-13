@@ -2,7 +2,6 @@
 export const ROUTES = {
   home: "/",
   cv: "/cv",
-  educadoraCanina: "/proyectos/educadora-canina",
 } as const;
 
 // Section anchors on the home page (Figma screen 01).
