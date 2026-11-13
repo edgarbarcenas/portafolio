@@ -74,17 +74,25 @@ const SWIPE_THRESHOLD_PX = 40;
 type Box = { w: number; h: number };
 
 // Phone layout of the Figma scene inside the stage (px): scaled so the whole
-// character range fits the width (or the height, if shorter), feet resting on
-// the Scroll reserve, centred horizontally. `bottom` is the stage's bottom
-// edge in frame px, so the purple backgrounds can stretch down to it.
+// character range fits the width (or the height, if shorter), centred in the
+// space above the Scroll reserve. `top` / `bottom` are the stage's edges in
+// frame px, so the purple backgrounds can stretch to them.
 function compactScene(stage: Box) {
   const s = Math.max(
     0.1,
     Math.min((stage.w - 2 * COMPACT_GUTTER) / COMPACT_SCENE_W, (stage.h - COMPACT_SCROLL_RESERVE) / (FEET_Y - SCENE_TOP)),
   );
   const tx = (stage.w - COMPACT_SCENE_W * s) / 2 - SPLASH.x * s;
-  const ty = stage.h - COMPACT_SCROLL_RESERVE - FEET_Y * s;
-  return { s, tx, clipTop: ty + SCENE_TOP * s, bottom: (stage.h - ty) / s };
+  const ty = (stage.h - COMPACT_SCROLL_RESERVE - (FEET_Y - SCENE_TOP) * s) / 2 - SCENE_TOP * s;
+  return { s, tx, ty, top: -ty / s, bottom: (stage.h - ty) / s };
+}
+
+// Same idea as the desktop fill: a background's part below the Figma nav bar
+// (frame y 137 down to its bottom edge) is stretched (preserveAspectRatio
+// "none") to span the stage from top to bottom.
+function stretchBg(y: number, h: number, view: { top: number; bottom: number }) {
+  const k = (view.bottom - view.top) / (y + h - SCENE_TOP);
+  return { top: view.top - (SCENE_TOP - y) * k, height: h * k };
 }
 
 // Intro overlay (Figma screen 00): a full-viewport dialog shown once per
@@ -279,8 +287,8 @@ export default function IntroOverlay() {
   // Responsive proposal (not in Figma, which only designs 1440): below 768px
   // the 1440x682 frame would shrink to a thin strip with a ~20px Scroll
   // button. Phones get a vertical recomposition instead: a one-line header,
-  // name and tagline at the top, the scene grouped at the bottom and the
-  // Scroll button centred under it. Taps on any empty area advance the
+  // the scene centred with its backgrounds stretched edge to edge (as on
+  // desktop) and the Scroll button centred under it. Taps on any empty area advance the
   // illustration (swipes already do). Height is 100svh (100vh fallback) so
   // nothing hides behind the iOS Safari toolbar.
   if (viewport.w < COMPACT_MAX_W) {
@@ -301,47 +309,33 @@ export default function IntroOverlay() {
             if (!(event.target as HTMLElement).closest("button")) advance();
           }}
         >
-          <div className="shrink-0 px-6 pt-6">
-            <img
-              src="/figma/inicio/wordmark.svg"
-              alt="Edgar Barcenas"
-              draggable={false}
-              className="block h-auto w-[clamp(200px,64vw,280px)]"
-            />
-            <p className="mt-3 font-sans text-[15px] leading-[22px] text-negro">
-              Focus programming is my passion and my every day, all day ;D
-            </p>
-          </div>
           <div ref={observeStage} className="relative min-h-0 flex-1 overflow-hidden">
             {scene && (
-              // Clipped at the Figma nav bar's bottom edge (frame y 137); the
-              // backgrounds stretch (preserveAspectRatio="none") down to the
-              // stage bottom, behind the Scroll button.
-              <div className="absolute inset-x-0 bottom-0 overflow-hidden" style={{ top: scene.clipTop }}>
-                <div
-                  className="absolute left-0 top-0"
-                  style={{
-                    width: FRAME.w,
-                    height: scene.bottom,
-                    transform: `translate(${scene.tx}px, ${-SCENE_TOP * scene.s}px) scale(${scene.s})`,
-                    transformOrigin: "top left",
-                  }}
-                >
-                  <img src="/figma/intro/bg-left.svg" alt="" aria-hidden="true" draggable={false} className="pointer-events-none absolute block max-w-none" style={{ left: 0, top: -8, width: 609, height: Math.max(693, scene.bottom + 8) }} />
-                  <img src="/figma/intro/bg-right.svg" alt="" aria-hidden="true" draggable={false} className="pointer-events-none absolute block max-w-none" style={{ left: 640, top: 1, width: 801, height: Math.max(691, scene.bottom - 1) }} />
-                  <div className="absolute" style={{ left: SPLASH.x, top: SPLASH.y, width: SPLASH.w, height: SPLASH.h }}>
-                    <Splash transition={transition} onAdvance={advance} onDrag={dragAdvance} />
-                  </div>
+              <div
+                className="absolute left-0 top-0 isolate"
+                style={{
+                  width: FRAME.w,
+                  height: FRAME.h,
+                  transform: `translate(${scene.tx}px, ${scene.ty}px) scale(${scene.s})`,
+                  transformOrigin: "top left",
+                }}
+              >
+                <img src="/figma/intro/bg-left.svg" alt="" aria-hidden="true" draggable={false} className="pointer-events-none absolute block max-w-none" style={{ left: 0, width: 609, ...stretchBg(-8, 693, scene) }} />
+                <img src="/figma/intro/bg-right.svg" alt="" aria-hidden="true" draggable={false} className="pointer-events-none absolute block max-w-none" style={{ left: 640, width: 801, ...stretchBg(1, 691, scene) }} />
+                <div className="absolute" style={{ left: SPLASH.x, top: SPLASH.y, width: SPLASH.w, height: SPLASH.h }}>
+                  <Splash transition={transition} onAdvance={advance} onDrag={dragAdvance} />
                 </div>
               </div>
             )}
-            {/* Centred under the scene, clear of the home indicator; the white
-                pill keeps the paw legible where it overlaps the purple. */}
+            {/* Centred under the scene, clear of the home indicator, and stacked
+                above it (z-10: iOS Safari can paint the animating splash layers
+                over a later sibling otherwise); the white pill keeps the paw
+                legible where it overlaps the purple. */}
             <button
               type="button"
               onClick={exit}
               aria-label="Scroll — entrar al portafolio"
-              className="absolute left-1/2 flex min-h-11 min-w-11 -translate-x-1/2 flex-col items-center gap-0.5 rounded-2xl border-0 bg-white/90 px-3 py-1 shadow-[0_1px_3px_rgba(0,0,0,0.2)]"
+              className="absolute left-1/2 z-10 flex min-h-11 min-w-11 -translate-x-1/2 flex-col items-center gap-0.5 rounded-2xl border-0 bg-white/90 px-3 py-1 shadow-[0_1px_3px_rgba(0,0,0,0.2)]"
               style={{ bottom: "max(12px, env(safe-area-inset-bottom))" }}
             >
               <Huellita style={{ width: 48, height: 48 / HUELLITA_ASPECT }} />

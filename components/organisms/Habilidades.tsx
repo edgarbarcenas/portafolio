@@ -10,11 +10,13 @@ export default function Habilidades() {
       <h2 className="text-center font-sans text-[32px] leading-normal font-semibold text-negro xl:leading-[27px]">
         Habilidades Técnicas
       </h2>
-      {/* Responsive proposal (not in Figma): 1 col mobile, 2 tablet, 3 desktop;
-          cards in a row stretch to the same height. */}
-      <ul className="mt-8 grid w-full grid-cols-1 items-stretch gap-x-[67.5px] gap-y-5 md:grid-cols-2 xl:gap-y-[37px] xl:mt-[55px] xl:grid-cols-3">
+      {/* Responsive proposal (not in Figma): a swipeable carousel on mobile
+          (scroll-snap, edge to edge, the next card peeking so it reads as
+          scrollable), 2 cols tablet, 3 desktop; cards in a row stretch to the
+          same height. */}
+      <ul className="relative -mx-4 mt-8 flex snap-x snap-mandatory scroll-px-4 items-stretch gap-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] md:static md:mx-0 md:grid md:w-full md:snap-none md:grid-cols-2 md:gap-x-[67.5px] md:gap-y-5 md:overflow-visible md:px-0 md:pb-0 xl:mt-[55px] xl:grid-cols-3 xl:gap-y-[37px]">
         {SKILL_CATEGORIES.map((category) => (
-          <li key={category.title} className="mx-auto flex w-full max-w-[315px] xl:mx-0">
+          <li key={category.title} className="flex w-[85%] max-w-[315px] shrink-0 snap-start snap-always md:mx-auto md:w-full xl:mx-0">
             <SkillCard category={category} />
           </li>
         ))}
