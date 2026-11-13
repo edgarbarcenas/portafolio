@@ -43,11 +43,11 @@ export default function Perfil() {
         <p className="max-w-[515px] text-[17px] leading-[27px] text-negro xl:absolute xl:left-[522px] xl:top-[120px] xl:w-[515px] xl:max-w-none">
           <strong className="font-bold">Bio:</strong>
           <br />
-          Padre de 2 perros, 5 unicornios y 1 novia. Tengo 28 años, vivo en Chile
+          Esposo y papá de 2 perritas. Tengo 28 años, vivo en Chile
           desde los 18 y programo desde los 20. Empecé como autodidacta y en 2025
           completé mi primer diplomado en Arquitectura de Software. ¿Mi
           inspiración? Los pequeños detalles del día a día… y a veces los restos
-          de comida que me dejan los perros.
+          de comida que me dejan mis perritas.
         </p>
 
         <p className="text-[20px] font-semibold leading-[30px] text-negro xl:absolute xl:left-[522px] xl:top-[408px] xl:w-[557px]">
