@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import IsoEdgar from "@/components/atoms/IsoEdgar";
 import { ROUTES } from "@/lib/routes";
 
 // Figma screen 03 "Bio", block page y 144-682 (538 tall), bg lila.
@@ -7,7 +7,7 @@ import { ROUTES } from "@/lib/routes";
 export default function Perfil() {
   return (
     <section className="relative bg-lila xl:h-[538px]">
-      {/* Responsive proposal (not in Figma): below xl, breadcrumb then photo
+      {/* Responsive proposal (not in Figma): below xl, breadcrumb then avatar
           then name then bio then tagline stack in a single column with 24 px
           padding; from xl up every piece sits at its exact Figma coordinate. */}
       <div className="flex flex-col gap-8 px-6 py-6 xl:block xl:px-0 xl:py-0">
@@ -31,13 +31,10 @@ export default function Perfil() {
           </ol>
         </nav>
 
-        <Image
-          src="/figma/bio/foto-edgar.png"
-          alt="Fotografía de Edgar Barcenas"
-          width={207}
-          height={257}
-          className="border border-negro object-cover xl:absolute xl:left-[244px] xl:top-[120px]"
-        />
+        {/* Avatar ilustrado en lugar de la foto; ocupa el mismo ancho (207 px)
+            y la misma esquina que tenía la foto en Figma. */}
+        <IsoEdgar width={207} className="xl:absolute xl:left-[244px] xl:top-[120px]" />
+
 
         <h1 className="text-[40px] font-bold leading-[35px] text-negro xl:absolute xl:left-[244px] xl:top-[397px] xl:w-[208px]">
           Edgar Barcenas
@@ -46,10 +43,11 @@ export default function Perfil() {
         <p className="max-w-[515px] text-[17px] leading-[27px] text-negro xl:absolute xl:left-[522px] xl:top-[120px] xl:w-[515px] xl:max-w-none">
           <strong className="font-bold">Bio:</strong>
           <br />
-          Padre de 2 perros, 5 unicornios &amp; 1 novia, Desarrollo desde que tengo
-          memoria. A menudo me preguntan de dónde saco mi inspiración: de los
-          pequeños detalles cotidianos. Y a veces de los restos de comida que me
-          dejan los perros.
+          Padre de 2 perros, 5 unicornios y 1 novia. Tengo 28 años, vivo en Chile
+          desde los 18 y programo desde los 20. Empecé como autodidacta y en 2025
+          completé mi primer diplomado en Arquitectura de Software. ¿Mi
+          inspiración? Los pequeños detalles del día a día… y a veces los restos
+          de comida que me dejan los perros.
         </p>
 
         <p className="text-[20px] font-semibold leading-[30px] text-negro xl:absolute xl:left-[522px] xl:top-[408px] xl:w-[557px]">

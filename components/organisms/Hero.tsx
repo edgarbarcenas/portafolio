@@ -31,7 +31,7 @@ export default function Hero() {
         </h1>
 
         <p className="font-sans text-[17px] leading-[27px] xl:absolute xl:inset-x-0 xl:top-[304px]">
-          Focus programming is my passion and my every day, all day ;D
+          Programador de día, gamer de noche y soñando con mi propio equipo de eSports ;D
         </p>
       </div>
 
