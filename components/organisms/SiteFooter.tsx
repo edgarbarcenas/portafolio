@@ -10,7 +10,7 @@ export default function SiteFooter() {
     <footer className="bg-negro">
       <div className="bg-lila">
         <p className="mx-auto max-w-[1440px] px-6 py-4 text-center font-sans text-[14px] font-medium leading-[1.379] text-negro xl:h-[63px] xl:px-[111px] xl:pb-0 xl:pt-[20px] xl:text-left xl:text-[16px]">
-          Desarrollado por Edgar Code{" "}
+          Desarrollado por Edgar Barcenas{" "}
           <img
             src="/figma/footer/icono.svg"
             alt=""

@@ -6,7 +6,7 @@ describe("SiteFooter", () => {
   it("renders the Figma credits and tagline inside a contentinfo landmark", () => {
     render(<SiteFooter />);
     const footer = screen.getByRole("contentinfo");
-    expect(footer.textContent).toContain("Desarrollado por Edgar Code");
+    expect(footer.textContent).toContain("Desarrollado por Edgar Barcenas");
     expect(footer.textContent).toContain("Todos los derechos reservados.");
     const link = screen.getByRole("link", { name: /Brusacrea/ });
     expect(link.getAttribute("href")).toBe("https://brusacrea.com");
